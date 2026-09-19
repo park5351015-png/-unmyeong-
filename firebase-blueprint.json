@@ -1,0 +1,379 @@
+{
+  "entities": {
+    "Sport": {
+      "title": "Sport",
+      "description": "Information about an exercise sport tailored for college students",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique sport identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Sport name in Korean"
+        },
+        "englishName": {
+          "type": "string",
+          "description": "Sport name in English"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category such as 유산소, 근력, 라켓, 힐링/유연성, 이색/액티비티"
+        },
+        "intro": {
+          "type": "string",
+          "description": "Introduction description of the sport"
+        },
+        "difficulty": {
+          "type": "number",
+          "description": "Difficulty level from 1 to 5"
+        },
+        "estimatedCost": {
+          "type": "string",
+          "description": "Estimated cost breakdown for college students"
+        },
+        "costLevel": {
+          "type": "number",
+          "description": "Cost rating from 1 to 5"
+        },
+        "effects": {
+          "type": "string",
+          "description": "Main physical and mental workout effects"
+        },
+        "items": {
+          "type": "string",
+          "description": "Required items and equipment"
+        },
+        "beginnerTip": {
+          "type": "string",
+          "description": "Real tips for beginners and college students"
+        },
+        "targetGroup": {
+          "type": "string",
+          "description": "Recommended target audience"
+        },
+        "location": {
+          "type": "string",
+          "description": "Exercise location (실내, 실외, 실내/실외)"
+        },
+        "caloriesPerHour": {
+          "type": "number",
+          "description": "Average calories burned per hour"
+        },
+        "accessibility": {
+          "type": "string",
+          "description": "Accessibility rating for college students"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Lucide icon identifier"
+        }
+      },
+      "required": ["id", "name", "category", "intro", "difficulty", "estimatedCost"]
+    },
+    "QuizQuestion": {
+      "title": "QuizQuestion",
+      "description": "A question for the college student exercise propensity test",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Question ID"
+        },
+        "order": {
+          "type": "number",
+          "description": "Question sequence number (1-8)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The question title"
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Explanatory subtitle or context"
+        },
+        "category": {
+          "type": "string",
+          "description": "Quiz dimension (목적, 방식, 강도, 인원, 장소, 시간, 비용, 가치)"
+        }
+      },
+      "required": ["id", "order", "title", "category"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Recommended sports gear, items, or affiliate services",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Product ID"
+        },
+        "sportId": {
+          "type": "string",
+          "description": "Associated sport ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name"
+        },
+        "brand": {
+          "type": "string",
+          "description": "Brand name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the item"
+        },
+        "price": {
+          "type": "string",
+          "description": "Product price in KRW"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Image URL or icon badge"
+        },
+        "affiliateUrl": {
+          "type": "string",
+          "description": "Outlink URL for purchasing"
+        },
+        "isSponsored": {
+          "type": "boolean",
+          "description": "Whether this item is SPONSORED/제휴"
+        },
+        "clicks": {
+          "type": "number",
+          "description": "Number of recorded user clicks"
+        }
+      },
+      "required": ["id", "sportId", "name", "brand", "price"]
+    },
+    "SponsorInquiry": {
+      "title": "SponsorInquiry",
+      "description": "Brand partnership or sponsorship proposal from an external company",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Inquiry unique ID"
+        },
+        "brandName": {
+          "type": "string",
+          "description": "Company or Brand name"
+        },
+        "managerName": {
+          "type": "string",
+          "description": "Name of contact person"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email"
+        },
+        "partnershipType": {
+          "type": "string",
+          "description": "Type of partnership (용품 제휴, 시설 제휴, 프로모션, 기타)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Proposal message details"
+        },
+        "status": {
+          "type": "string",
+          "description": "Inquiry review status (접수완료, 검토중, 연락완료)"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp"
+        }
+      },
+      "required": ["id", "brandName", "managerName", "email", "message"]
+    },
+    "Analytics": {
+      "title": "Analytics",
+      "description": "Aggregated stats for the admin dashboard",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Doc ID (e.g. general)"
+        },
+        "totalTestsCompleted": {
+          "type": "number",
+          "description": "Total completed quiz tests"
+        },
+        "totalProductClicks": {
+          "type": "number",
+          "description": "Total affiliate product clicks"
+        },
+        "totalInquiries": {
+          "type": "number",
+          "description": "Total sponsor inquiries received"
+        }
+      },
+      "required": ["id"]
+    },
+    "CommunityPost": {
+      "title": "CommunityPost",
+      "description": "Posts for sports community, mate finding, and exercise reviews",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Post ID"
+        },
+        "type": {
+          "type": "string",
+          "description": "Post type: general, mate, review"
+        },
+        "sportId": {
+          "type": "string",
+          "description": "Associated sport identifier"
+        },
+        "sportName": {
+          "type": "string",
+          "description": "Associated sport name in Korean"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the post"
+        },
+        "content": {
+          "type": "string",
+          "description": "Body text of the post"
+        },
+        "authorId": {
+          "type": "string",
+          "description": "User UID of the author"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the author"
+        },
+        "authorUniversity": {
+          "type": "string",
+          "description": "University or campus of the author"
+        },
+        "authorPhotoURL": {
+          "type": "string",
+          "description": "Author avatar photo URL"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of hashtags",
+          "items": { "type": "string" }
+        },
+        "likes": {
+          "type": "number",
+          "description": "Count of likes or cheers"
+        },
+        "commentsCount": {
+          "type": "number",
+          "description": "Number of comments"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp in ISO format"
+        },
+        "status": {
+          "type": "string",
+          "description": "Recruitment status for mate posts: recruiting, completed"
+        },
+        "mateInfo": {
+          "type": "object",
+          "description": "Optional details for exercise mate recruitment"
+        },
+        "reviewInfo": {
+          "type": "object",
+          "description": "Optional details for workout reviews and success stories"
+        },
+        "isNotice": {
+          "type": "boolean",
+          "description": "Whether this post is an admin notice"
+        },
+        "isPinned": {
+          "type": "boolean",
+          "description": "Whether this post is pinned"
+        }
+      },
+      "required": ["id", "type", "sportId", "sportName", "title", "content", "authorName", "createdAt"]
+    },
+    "PostComment": {
+      "title": "PostComment",
+      "description": "Comments and replies on community posts",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Comment ID"
+        },
+        "postId": {
+          "type": "string",
+          "description": "Parent post ID"
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Author UID"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Author display name"
+        },
+        "authorUniversity": {
+          "type": "string",
+          "description": "Author university"
+        },
+        "authorPhotoURL": {
+          "type": "string",
+          "description": "Author profile photo URL"
+        },
+        "content": {
+          "type": "string",
+          "description": "Comment content text"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "likes": {
+          "type": "number",
+          "description": "Like count"
+        }
+      },
+      "required": ["id", "postId", "authorName", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/sports/{sportId}": {
+      "schema": "Sport",
+      "description": "Sport profiles and metadata"
+    },
+    "/quizQuestions/{questionId}": {
+      "schema": "QuizQuestion",
+      "description": "Test questions and answer score definitions"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Recommended starter gear and affiliate items"
+    },
+    "/sponsorInquiries/{inquiryId}": {
+      "schema": "SponsorInquiry",
+      "description": "Submitted partnership requests"
+    },
+    "/analytics/{analyticsId}": {
+      "schema": "Analytics",
+      "description": "Aggregated site usage metrics"
+    },
+    "/communityPosts/{postId}": {
+      "schema": "CommunityPost",
+      "description": "Community posts for sports discussion, mate finding, and reviews"
+    },
+    "/communityPosts/{postId}/comments/{commentId}": {
+      "schema": "PostComment",
+      "description": "Comments under each community post"
+    }
+  }
+}

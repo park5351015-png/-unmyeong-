@@ -1,0 +1,6 @@
+{
+  "name": "운명 (運動命) - 대학생 맞춤 운동 추천",
+  "description": "나와 딱 맞는 운동을 만나는 건, 어쩌면 운명. 운동을 시작하고 싶은 대학생을 위한 맞춤 운동 성향 테스트 및 추천 서비스",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

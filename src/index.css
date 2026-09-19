@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background-color: #FBFBFE;
+  color: #1F2937;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dot grid background from reference (heyclicky) */
+.bg-dot-pattern {
+  background-image: radial-gradient(#d5d7e0 1.25px, transparent 1.25px);
+  background-size: 22px 22px;
+}
+
+.bg-dot-pattern-dense {
+  background-image: radial-gradient(#c7cbd8 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F3F4F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #DDD8F7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C2BAF3;
+}
+
+/* Marquee infinite scroll */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
