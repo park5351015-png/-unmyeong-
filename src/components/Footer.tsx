@@ -1,13 +1,14 @@
 import React from 'react';
-import { Heart, Sparkles, Terminal, ArrowUpRight } from 'lucide-react';
+import { Heart, Sparkles, Terminal, ArrowUpRight, Smartphone, Download } from 'lucide-react';
 
 interface FooterProps {
   onOpenSponsor: () => void;
   onOpenQuiz: () => void;
   onSelectTab: (tab: 'home' | 'browse' | 'compare' | 'places' | 'community' | 'products' | 'sponsor' | 'admin') => void;
+  onOpenInstall?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenSponsor, onOpenQuiz, onSelectTab }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenSponsor, onOpenQuiz, onSelectTab, onOpenInstall }) => {
   return (
     <footer className="bg-[#FAF9FD] border-t border-gray-200/80 pt-12 pb-16 text-gray-500 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -92,6 +93,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSponsor, onOpenQuiz, onSel
                   가성비 스타터 장비 큐레이션
                 </button>
               </li>
+              {onOpenInstall && (
+                <li>
+                  <button
+                    onClick={onOpenInstall}
+                    className="hover:text-[#4F46E5] text-[#6C5CE7] font-bold transition-colors cursor-pointer flex items-center gap-1.5 pt-1"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>운명 앱 홈화면 설치하기</span>
+                    <span className="px-1.5 py-0.2 rounded-full bg-[#EAE6FE] text-[10px] text-[#6C5CE7]">앱</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 

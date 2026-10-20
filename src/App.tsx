@@ -13,6 +13,9 @@ import { CommunitySection } from './components/CommunitySection';
 import { CampusPlacesSection } from './components/CampusPlacesSection';
 import { AdminDashboard } from './components/AdminDashboard';
 import { Footer } from './components/Footer';
+import { PWAInstallModal } from './components/PWAInstallModal';
+import { PWAInstallBanner } from './components/PWAInstallBanner';
+import { OfflineIndicator } from './components/OfflineIndicator';
 
 import {
   Sport,
@@ -74,6 +77,7 @@ export default function App() {
   const [compareSportB, setCompareSportB] = useState<Sport | null>(null);
 
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
   const [filterProductSportId, setFilterProductSportId] = useState<string | null>(null);
 
   // Check admin rights
@@ -207,6 +211,7 @@ export default function App() {
           setCurrentTab('admin');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onOpenInstall={() => setIsInstallModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -343,13 +348,25 @@ export default function App() {
       <Footer
         onOpenSponsor={handleOpenSponsor}
         onOpenQuiz={handleStartQuiz}
+        onOpenInstall={() => setIsInstallModalOpen(true)}
         onSelectTab={(tab) => {
           setCurrentTab(tab);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
       />
 
+      {/* Floating In-App Install Prompt Banner */}
+      <PWAInstallBanner onOpenInstallModal={() => setIsInstallModalOpen(true)} />
+
+      {/* Offline Status Indicator */}
+      <OfflineIndicator />
+
       {/* Modals */}
+      <PWAInstallModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+      />
+
       <QuizModal
         isOpen={isQuizOpen}
         onClose={() => setIsQuizOpen(false)}

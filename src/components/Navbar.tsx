@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Compass, GitCompare, ShoppingBag, Mail, ShieldCheck, LogIn, LogOut, User, Users, Wifi, BatteryMedium, Headphones, MapPin } from 'lucide-react';
+import { Sparkles, Compass, GitCompare, ShoppingBag, Mail, ShieldCheck, LogIn, LogOut, User, Users, Wifi, BatteryMedium, Headphones, MapPin, Download, Smartphone } from 'lucide-react';
 import { User as FirebaseUser } from 'firebase/auth';
 
 interface NavbarProps {
@@ -11,6 +11,7 @@ interface NavbarProps {
   onLogout: () => void;
   isAdminLoggedIn: boolean;
   onOpenAdmin: () => void;
+  onOpenInstall: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onLogout,
   isAdminLoggedIn,
   onOpenAdmin,
+  onOpenInstall,
 }) => {
   return (
     <header className="sticky top-0 z-50 bg-[#FBFBFE]/90 backdrop-blur-md border-b border-gray-200/70 text-gray-800">
@@ -139,6 +141,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-gray-400">12:15 PM</span>
           </div>
 
+          {/* App Install Button */}
+          <button
+            onClick={onOpenInstall}
+            title="스마트폰/PC에 앱 설치하기"
+            className="px-2.5 py-1 rounded-lg border border-[#E0DAFC] bg-white hover:bg-[#F4F1FF] text-[#6C5CE7] text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer shadow-2xs"
+          >
+            <Download className="w-3 h-3 text-[#6C5CE7]" />
+            <span>앱 설치</span>
+          </button>
+
           {/* Admin Button */}
           <button
             onClick={onOpenAdmin}
@@ -236,6 +248,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           className={`py-1 px-2 font-medium ${currentTab === 'sponsor' ? 'text-[#4F46E5] font-bold' : 'text-gray-500'}`}
         >
           제휴
+        </button>
+        <button
+          onClick={onOpenInstall}
+          className="py-1 px-2 font-bold text-[#6C5CE7] flex items-center gap-0.5 shrink-0"
+        >
+          <Download className="w-3 h-3" />
+          <span>앱설치</span>
         </button>
       </div>
     </header>
