@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, Play, Volume2, VolumeX, Folder, HardDrive, Trash2, Camera, Laptop, Activity, Compass, Users } from 'lucide-react';
+import { Sparkles, ArrowRight, Play, Volume2, VolumeX, Folder, HardDrive, Trash2, Camera, Laptop, Activity, Compass, Users, MapPin } from 'lucide-react';
 import heroImg from '../assets/images/college_running_photo_1789816975948.jpg';
 
 interface HeroSectionProps {
   onStartQuiz: () => void;
   onExploreSports: () => void;
   onGoToCommunity?: () => void;
+  onGoToPlaces?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExploreSports, onGoToCommunity }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExploreSports, onGoToCommunity, onGoToPlaces }) => {
   const [isMuted, setIsMuted] = useState(true);
 
   return (
@@ -68,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExplore
           <div className="w-10 h-10 rounded-lg bg-gradient-to-b from-[#60A5FA] to-[#3B82F6] shadow-sm flex items-center justify-center text-white border-t border-blue-300 group-hover:scale-105 transition-transform">
             <Folder className="w-6 h-6 fill-blue-100 text-blue-200" />
           </div>
-          <span className="text-[11px] font-mono text-gray-600 bg-white/80 px-1 rounded shadow-2xs">캠퍼스_시설</span>
+          <span className="text-[11px] font-mono text-gray-600 bg-white/80 px-1 rounded shadow-2xs">계명대_성서캠_시설</span>
         </div>
 
         <div className="hidden lg:flex absolute top-72 left-20 text-xs font-mono text-gray-400">
@@ -112,9 +113,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExplore
         {/* Top Kaomoji & Status Pill */}
         <div className="flex items-center justify-center gap-3 mb-3">
           <span className="text-xs font-mono text-gray-400 tracking-wider">^ ω ^</span>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-gray-200/80 shadow-2xs text-gray-600 text-xs font-medium">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>대학생 전용 맞춤 운동 추천 플랫폼</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#D5CEFC] shadow-2xs text-[#002C6C] text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#002C6C] animate-pulse" />
+            <span>계명대학교 성서캠퍼스 전용 스포츠 큐레이션</span>
           </div>
           <span className="text-xs font-mono text-gray-400 tracking-wider">( -_- )</span>
         </div>
@@ -128,12 +129,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExplore
             find your sport, find your destiny
           </p>
           <p className="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto">
-            내 시간표, 지갑 사정, MBTI 성향까지! 나에게 딱 맞는 진짜 인생 운동을 찾아보세요.
+            계명대 대운동장 트랙부터 아담스채플 힐코스까지! 내 시간표, 지갑 사정, MBTI 성향에 딱 맞는 진짜 인생 운동을 찾아보세요.
           </p>
         </div>
 
         {/* CTA Buttons (Pills styled like "download for mac" in reference) */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto mb-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto mb-4">
           <button
             onClick={onStartQuiz}
             className="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-b from-[#4F46E5] to-[#4338CA] hover:from-[#4338CA] hover:to-[#3730A3] text-white font-bold text-sm shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group border-t border-indigo-400/50"
@@ -143,12 +144,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExplore
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
+          {onGoToPlaces && (
+            <button
+              onClick={onGoToPlaces}
+              className="w-full sm:w-auto px-5 py-3 rounded-full bg-white hover:bg-gray-50 text-[#002C6C] font-bold text-sm border border-indigo-200 shadow-2xs hover:shadow-xs transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <MapPin className="w-4 h-4 text-[#4F46E5]" />
+              <span>내 주변 운동 장소 (3km)</span>
+            </button>
+          )}
+
           <button
             onClick={onExploreSports}
             className="w-full sm:w-auto px-5 py-3 rounded-full bg-white hover:bg-gray-50 text-gray-800 font-semibold text-sm border border-gray-300/80 shadow-2xs hover:shadow-xs transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
           >
             <Compass className="w-4 h-4 text-gray-500" />
-            <span>10가지 추천 운동 둘러보기</span>
+            <span>10가지 추천 운동</span>
           </button>
 
           {onGoToCommunity && (

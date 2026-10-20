@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Sparkles, Share2, RotateCcw, ArrowRight, Check, Heart, Trophy, Zap, Shield, Flame } from 'lucide-react';
 import { UserTestResult, Sport } from '../types';
+import { KMU_RUNNING_COURSES } from '../data/kmuCampusData';
 
 interface TestResultModalProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface TestResultModalProps {
   onRetest: () => void;
   onViewSportDetail: (sport: Sport) => void;
   onViewProducts: (sportId: string) => void;
+  onViewCampusPlaces?: (courseId?: string) => void;
 }
 
 export const TestResultModal: React.FC<TestResultModalProps> = ({
@@ -18,6 +20,7 @@ export const TestResultModal: React.FC<TestResultModalProps> = ({
   onRetest,
   onViewSportDetail,
   onViewProducts,
+  onViewCampusPlaces,
 }) => {
   const [copied, setCopied] = useState(false);
   const [activeSportIndex, setActiveSportIndex] = useState(0);
@@ -202,6 +205,104 @@ export const TestResultModal: React.FC<TestResultModalProps> = ({
             <div className="bg-[#FEFCE8] p-3 rounded-2xl border border-[#FEF08A] text-xs text-[#854D0E] leading-relaxed">
               <span className="font-bold">🏫 대학생 꿀팁: </span>
               {currentRecommendation.sport.beginnerTip}
+            </div>
+
+            {/* Keimyung University Tailored Running Course Recommendation */}
+            <div className="bg-gradient-to-br from-[#002C6C]/8 via-[#F5F3FF] to-white p-4.5 rounded-2xl border border-indigo-200/80 space-y-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[11px] font-bold text-[#002C6C] bg-white px-2.5 py-0.5 rounded-md border border-indigo-200 flex items-center gap-1 shadow-2xs">
+                  <span>🏫 계명대 성서캠퍼스 맞춤 추천 러닝 코스</span>
+                </span>
+                <span className="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  실제 코스 검증완료
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                <div>
+                  <h5 className="text-sm font-black text-gray-900">
+                    {(() => {
+                      const sId = currentRecommendation.sport.id;
+                      const course =
+                        sId === 'running' || sId === 'crossfit'
+                          ? KMU_RUNNING_COURSES[1]
+                          : sId === 'walking' || sId === 'pilates' || sId === 'yoga'
+                          ? KMU_RUNNING_COURSES[3]
+                          : sId === 'climbing'
+                          ? KMU_RUNNING_COURSES[4]
+                          : sId === 'cycling'
+                          ? KMU_RUNNING_COURSES[2]
+                          : KMU_RUNNING_COURSES[0];
+                      return course.name;
+                    })()}
+                  </h5>
+                  <p className="text-xs text-gray-600 mt-0.5">
+                    {(() => {
+                      const sId = currentRecommendation.sport.id;
+                      const course =
+                        sId === 'running' || sId === 'crossfit'
+                          ? KMU_RUNNING_COURSES[1]
+                          : sId === 'walking' || sId === 'pilates' || sId === 'yoga'
+                          ? KMU_RUNNING_COURSES[3]
+                          : sId === 'climbing'
+                          ? KMU_RUNNING_COURSES[4]
+                          : sId === 'cycling'
+                          ? KMU_RUNNING_COURSES[2]
+                          : KMU_RUNNING_COURSES[0];
+                      return (
+                        <>
+                          거리: <strong>{course.distance.split('(')[0]}</strong> · 난이도:{' '}
+                          <span className="text-amber-600 font-bold">
+                            {'★'.repeat(course.difficulty)}
+                          </span>{' '}
+                          · 예상: <strong>{course.estimatedTime}</strong>
+                        </>
+                      );
+                    })()}
+                  </p>
+                  <p className="text-[11px] text-gray-500 mt-1 line-clamp-1">
+                    📍{' '}
+                    {(() => {
+                      const sId = currentRecommendation.sport.id;
+                      const course =
+                        sId === 'running' || sId === 'crossfit'
+                          ? KMU_RUNNING_COURSES[1]
+                          : sId === 'walking' || sId === 'pilates' || sId === 'yoga'
+                          ? KMU_RUNNING_COURSES[3]
+                          : sId === 'climbing'
+                          ? KMU_RUNNING_COURSES[4]
+                          : sId === 'cycling'
+                          ? KMU_RUNNING_COURSES[2]
+                          : KMU_RUNNING_COURSES[0];
+                      return course.waypoints.join(' → ');
+                    })()}
+                  </p>
+                </div>
+
+                {onViewCampusPlaces && (
+                  <button
+                    onClick={() => {
+                      const sId = currentRecommendation.sport.id;
+                      const course =
+                        sId === 'running' || sId === 'crossfit'
+                          ? KMU_RUNNING_COURSES[1]
+                          : sId === 'walking' || sId === 'pilates' || sId === 'yoga'
+                          ? KMU_RUNNING_COURSES[3]
+                          : sId === 'climbing'
+                          ? KMU_RUNNING_COURSES[4]
+                          : sId === 'cycling'
+                          ? KMU_RUNNING_COURSES[2]
+                          : KMU_RUNNING_COURSES[0];
+                      onClose();
+                      onViewCampusPlaces(course.id);
+                    }}
+                    className="px-3.5 py-2 rounded-xl bg-[#002C6C] hover:bg-[#002050] text-white text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shrink-0 shadow-xs cursor-pointer"
+                  >
+                    <span>캠퍼스 맵에서 보기</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

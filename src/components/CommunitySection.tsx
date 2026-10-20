@@ -108,15 +108,15 @@ export const CommunitySection: React.FC<CommunitySectionProps> = ({
         <div className="relative z-10 max-w-2xl space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#E0DAFC] text-xs font-bold text-[#6C5CE7] shadow-xs">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>대학생 운동 소통 플랫폼</span>
+            <span>계명대학교 성서캠퍼스 운동 소통 플랫폼</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-black text-gray-900 tracking-tight leading-tight">
             나의 운동 운명 메이트를 <br className="hidden sm:inline" />
-            만나는 곳, <span className="text-[#6C5CE7]">운명 커뮤니티</span>
+            만나는 곳, <span className="text-[#6C5CE7]">계명대 메이트 커뮤니티</span>
           </h1>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-            혼자 하기 막막했던 운동, 캠퍼스 친구와 함께 달리고 득근하세요!
-            종목별 질문과 리얼 후기, 교내·동네 운동 메이트 모집까지 자유롭게 소통할 수 있습니다.
+            혼자 하기 막막했던 운동, 계명대학교 학우들과 대운동장·체육관에서 함께 달리고 득근하세요!
+            종목별 질문과 리얼 후기, 성서캠퍼스 운동 메이트 모집까지 자유롭게 소통할 수 있습니다.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3">

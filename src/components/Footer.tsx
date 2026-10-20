@@ -4,7 +4,7 @@ import { Heart, Sparkles, Terminal, ArrowUpRight } from 'lucide-react';
 interface FooterProps {
   onOpenSponsor: () => void;
   onOpenQuiz: () => void;
-  onSelectTab: (tab: 'home' | 'browse' | 'compare' | 'community' | 'products' | 'sponsor' | 'admin') => void;
+  onSelectTab: (tab: 'home' | 'browse' | 'compare' | 'places' | 'community' | 'products' | 'sponsor' | 'admin') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenSponsor, onOpenQuiz, onSelectTab }) => {
@@ -66,6 +66,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSponsor, onOpenQuiz, onSel
                   className="hover:text-[#4F46E5] transition-colors cursor-pointer"
                 >
                   운동 1:1 레이더 차트 비교
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onSelectTab('places')}
+                  className="hover:text-[#4F46E5] transition-colors cursor-pointer text-[#002C6C] font-semibold"
+                >
+                  계명대 성서캠 운동장소 & 러닝코스
                 </button>
               </li>
               <li>

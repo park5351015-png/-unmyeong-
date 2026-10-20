@@ -29,7 +29,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [authorName, setAuthorName] = useState(currentUser?.displayName || '');
-  const [authorUniversity, setAuthorUniversity] = useState('대학생');
+  const [authorUniversity, setAuthorUniversity] = useState('계명대학교 성서캠');
   const [tagsInput, setTagsInput] = useState('');
 
   // Mate specific
@@ -250,7 +250,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 type="text"
                 value={authorUniversity}
                 onChange={(e) => setAuthorUniversity(e.target.value)}
-                placeholder="예: 연세대 신촌 / 건국대"
+                placeholder="예: 계명대 성서캠 / 체육학부"
                 maxLength={25}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs font-medium focus:outline-none focus:border-[#6C5CE7]"
               />
@@ -275,7 +275,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                       type="text"
                       value={mateLocation}
                       onChange={(e) => setMateLocation(e.target.value)}
-                      placeholder="예: 연세대 대운동장 트랙 앞, 성수 클라이밍장"
+                      placeholder="예: 계명대 성서캠 대운동장 트랙 앞, 계대 동문 볼더링장"
                       className="w-full pl-8 pr-3 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#6C5CE7] bg-white"
                     />
                   </div>
@@ -421,10 +421,10 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
               onChange={(e) => setTitle(e.target.value)}
               placeholder={
                 type === 'mate'
-                  ? '예: [신촌/러닝] 연세대 대운동장 트랙 저녁 러닝 메이트 구해요 (초보 6분대)'
+                  ? '예: [성서/러닝] 계명대 대운동장 트랙 저녁 러닝 메이트 구해요 (초보 6분대)'
                   : type === 'review'
                   ? '예: [후기] 과제 좀비였던 2학년의 100일 러닝 완주기 (5km 성공 썰)'
-                  : '예: 대학생 헬린이를 위한 교내 식당 가성비 단백질 식단 꿀팁'
+                  : '예: 계명대 학우를 위한 바우어관 학식 가성비 단백질 식단 꿀팁'
               }
               maxLength={100}
               className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-[#6C5CE7]"
@@ -453,7 +453,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
               type="text"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              placeholder="예: #신촌 #초보환영 #갓생 #주말러닝 #공강활용"
+              placeholder="예: #계명대 #성서캠 #대운동장 #초보환영 #공강활용"
               className="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#6C5CE7]"
             />
           </div>

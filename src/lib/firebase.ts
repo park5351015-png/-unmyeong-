@@ -83,8 +83,8 @@ const STORAGE_KEYS = {
   PRODUCTS: 'unmyeong_products_v1',
   INQUIRIES: 'unmyeong_inquiries_v1',
   ANALYTICS: 'unmyeong_analytics_v1',
-  POSTS: 'unmyeong_posts_v1',
-  COMMENTS: 'unmyeong_comments_v1',
+  POSTS: 'unmyeong_posts_kmu_v3',
+  COMMENTS: 'unmyeong_comments_kmu_v3',
 };
 
 // Seed initial data to Firestore if not already present, or return cached/defaults

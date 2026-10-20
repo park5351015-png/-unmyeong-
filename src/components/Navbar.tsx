@@ -1,10 +1,10 @@
 import React from 'react';
-import { Sparkles, Compass, GitCompare, ShoppingBag, Mail, ShieldCheck, LogIn, LogOut, User, Users, Wifi, BatteryMedium, Headphones } from 'lucide-react';
+import { Sparkles, Compass, GitCompare, ShoppingBag, Mail, ShieldCheck, LogIn, LogOut, User, Users, Wifi, BatteryMedium, Headphones, MapPin } from 'lucide-react';
 import { User as FirebaseUser } from 'firebase/auth';
 
 interface NavbarProps {
-  currentTab: 'home' | 'browse' | 'compare' | 'community' | 'products' | 'sponsor' | 'admin';
-  setCurrentTab: (tab: 'home' | 'browse' | 'compare' | 'community' | 'products' | 'sponsor' | 'admin') => void;
+  currentTab: 'home' | 'browse' | 'compare' | 'places' | 'community' | 'products' | 'sponsor' | 'admin';
+  setCurrentTab: (tab: 'home' | 'browse' | 'compare' | 'places' | 'community' | 'products' | 'sponsor' | 'admin') => void;
   onOpenQuiz: () => void;
   currentUser: FirebaseUser | null;
   onLogin: () => void;
@@ -42,20 +42,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-base font-black tracking-tight text-gray-900 group-hover:text-[#4F46E5] transition-colors">
               unmyeong
             </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 border border-gray-200 font-medium">
-              v2.4
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#002C6C] text-white flex items-center gap-1 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>계명대 성서캠</span>
             </span>
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-4 text-xs font-medium text-gray-600">
+          <nav className="hidden lg:flex items-center gap-3.5 text-xs font-medium text-gray-600">
             <button
               onClick={() => setCurrentTab('home')}
               className={`transition-colors cursor-pointer ${
                 currentTab === 'home' ? 'text-black font-bold' : 'hover:text-black'
               }`}
             >
-              홈 (features)
+              홈
             </button>
             <button
               onClick={onOpenQuiz}
@@ -70,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 currentTab === 'browse' ? 'text-black font-bold' : 'hover:text-black'
               }`}
             >
-              추천 운동 종목
+              추천 종목
             </button>
             <button
               onClick={() => setCurrentTab('compare')}
@@ -79,6 +80,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               운동비교
+            </button>
+            <button
+              onClick={() => setCurrentTab('places')}
+              className={`transition-colors cursor-pointer flex items-center gap-1 font-semibold ${
+                currentTab === 'places'
+                  ? 'text-[#002C6C] font-bold bg-indigo-50/80 px-2.5 py-1 rounded-xl'
+                  : 'hover:text-black'
+              }`}
+            >
+              <MapPin className="w-3 h-3 text-indigo-600" />
+              <span>내 주변 운동 장소</span>
             </button>
             <button
               onClick={() => setCurrentTab('community')}
@@ -200,6 +212,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           className={`py-1 px-2 font-medium ${currentTab === 'compare' ? 'text-[#4F46E5] font-bold' : 'text-gray-500'}`}
         >
           비교
+        </button>
+        <button
+          onClick={() => setCurrentTab('places')}
+          className={`py-1 px-2 font-medium ${currentTab === 'places' ? 'text-[#002C6C] font-bold' : 'text-gray-500'}`}
+        >
+          주변장소
         </button>
         <button
           onClick={() => setCurrentTab('community')}

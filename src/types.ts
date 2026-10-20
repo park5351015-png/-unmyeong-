@@ -91,7 +91,7 @@ export interface AnalyticsStats {
 export type CommunityPostType = 'general' | 'mate' | 'review';
 
 export interface MateInfo {
-  location: string; // e.g. "연세대 대운동장 트랙"
+  location: string; // e.g. "계명대 대운동장 트랙"
   schedule: string; // e.g. "매주 화/목 19:30"
   currentMembers: number;
   maxMembers: number;
@@ -116,7 +116,7 @@ export interface CommunityPost {
   content: string;
   authorId: string;
   authorName: string;
-  authorUniversity: string; // e.g. "연세대", "건국대", "서울대", "일반대학생"
+  authorUniversity: string; // e.g. "계명대학교 성서캠", "체육학부", "컴퓨터공학과"
   authorPhotoURL?: string;
   tags: string[];
   likes: number;

@@ -10,6 +10,7 @@ import { SportCompare } from './components/SportCompare';
 import { ProductsSection } from './components/ProductsSection';
 import { SponsorInquiryModal } from './components/SponsorInquiryModal';
 import { CommunitySection } from './components/CommunitySection';
+import { CampusPlacesSection } from './components/CampusPlacesSection';
 import { AdminDashboard } from './components/AdminDashboard';
 import { Footer } from './components/Footer';
 
@@ -46,7 +47,7 @@ import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 
 export default function App() {
   // Navigation
-  const [currentTab, setCurrentTab] = useState<'home' | 'browse' | 'compare' | 'community' | 'products' | 'sponsor' | 'admin'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'browse' | 'compare' | 'places' | 'community' | 'products' | 'sponsor' | 'admin'>('home');
 
   // Core Data
   const [sports, setSports] = useState<Sport[]>(DEFAULT_SPORTS);
@@ -218,6 +219,10 @@ export default function App() {
                 setCurrentTab('browse');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              onGoToPlaces={() => {
+                setCurrentTab('places');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               onGoToCommunity={() => {
                 setCurrentTab('community');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -260,6 +265,14 @@ export default function App() {
             initialSportB={compareSportB}
             onSelectSport={handleViewSportDetail}
             onStartQuiz={handleStartQuiz}
+          />
+        )}
+
+        {currentTab === 'places' && (
+          <CampusPlacesSection
+            userTestResult={testResult}
+            onOpenQuiz={handleStartQuiz}
+            onSelectSport={handleViewSportDetail}
           />
         )}
 
@@ -352,6 +365,10 @@ export default function App() {
         onRetest={handleRetest}
         onViewSportDetail={handleViewSportDetail}
         onViewProducts={handleViewProducts}
+        onViewCampusPlaces={() => {
+          setCurrentTab('places');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       <SportDetailModal

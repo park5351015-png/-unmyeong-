@@ -52,7 +52,7 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
   const [loadingComments, setLoadingComments] = useState(false);
   const [newCommentText, setNewCommentText] = useState('');
   const [commentAuthor, setCommentAuthor] = useState(currentUser?.displayName || '');
-  const [commentUniv, setCommentUniv] = useState('대학생');
+  const [commentUniv, setCommentUniv] = useState('계명대 성서캠');
   const [isSubmittingComment, setIsSubmittingComment] = useState(false);
 
   // Local likes count and status
@@ -556,7 +556,7 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                   type="text"
                   value={commentAuthor}
                   onChange={(e) => setCommentAuthor(e.target.value)}
-                  placeholder="닉네임 (예: 신촌러너)"
+                  placeholder="닉네임 (예: 성서러너 / 체육22)"
                   maxLength={15}
                   className="px-3 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#6C5CE7] bg-white"
                 />
@@ -564,7 +564,7 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                   type="text"
                   value={commentUniv}
                   onChange={(e) => setCommentUniv(e.target.value)}
-                  placeholder="소속 대학 (예: 연세대, 건국대)"
+                  placeholder="소속 대학 (예: 계명대 성서캠 / 체육학부)"
                   maxLength={20}
                   className="px-3 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#6C5CE7] bg-white"
                 />
