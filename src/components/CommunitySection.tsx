@@ -15,12 +15,21 @@ import {
   ArrowRight,
   Pin,
   Clock,
+  Navigation,
+  Leaf,
+  ShoppingBag,
+  Gift,
+  Zap,
 } from 'lucide-react';
 import { User as FirebaseUser } from 'firebase/auth';
-import { Sport, CommunityPost, CommunityPostType } from '../types';
+import { Sport, CommunityPost, CommunityPostType, ActivityType, UserEcoProfile, WorkoutActivity } from '../types';
 import { CreatePostModal } from './CreatePostModal';
 import { PostDetailModal } from './PostDetailModal';
+import { GpsActivityTracker } from './GpsActivityTracker';
+import { EcoRewardShopModal } from './EcoRewardShopModal';
+import { EcoMissionsModal } from './EcoMissionsModal';
 import { createCommunityPost } from '../lib/firebase';
+import { getEcoProfile } from '../lib/ecoStorage';
 
 interface CommunitySectionProps {
   sports: Sport[];
@@ -45,6 +54,14 @@ export const CommunitySection: React.FC<CommunitySectionProps> = ({
   const [selectedSportId, setSelectedSportId] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [recruitingOnly, setRecruitingOnly] = useState(false);
+
+  // Eco & GPS Tracking State
+  const [ecoProfile, setEcoProfile] = useState<UserEcoProfile>(() => getEcoProfile());
+  const [isGpsOpen, setIsGpsOpen] = useState(false);
+  const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isMissionsOpen, setIsMissionsOpen] = useState(false);
+  const [trackerMateName, setTrackerMateName] = useState<string>('');
+  const [trackerSportType, setTrackerSportType] = useState<ActivityType>('running');
 
   // Modals
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -95,6 +112,20 @@ export const CommunitySection: React.FC<CommunitySectionProps> = ({
   const handleOpenDetail = (post: CommunityPost) => {
     setSelectedPost(post);
     setIsDetailOpen(true);
+  };
+
+  const handleStartWorkoutWithMate = (mateName: string, sportId: string) => {
+    setTrackerMateName(mateName);
+    if (sportId === 'cycling') setTrackerSportType('cycling');
+    else if (sportId === 'running') setTrackerSportType('running');
+    else setTrackerSportType('walking');
+    setIsGpsOpen(true);
+  };
+
+  const handleStartSoloWorkout = (type: ActivityType = 'running') => {
+    setTrackerMateName('');
+    setTrackerSportType(type);
+    setIsGpsOpen(true);
   };
 
   // Metrics
@@ -154,6 +185,76 @@ export const CommunitySection: React.FC<CommunitySectionProps> = ({
           <div className="w-24 h-24 rounded-3xl bg-white/70 border border-[#EAE6FE] shadow-sm flex flex-col items-center justify-center p-3 text-center">
             <span className="text-2xl">💪</span>
             <span className="text-[11px] font-bold text-gray-700 mt-1">헬스 파트너</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Eco Carbon & GPS Tracking Hub Banner */}
+      <div className="bg-gradient-to-br from-[#1E1B4B] via-[#2E2875] to-[#1E1B4B] rounded-3xl p-6 sm:p-7 text-white shadow-xl border border-indigo-900/60 relative overflow-hidden">
+        <div className="absolute right-0 top-0 bottom-0 w-80 bg-gradient-to-l from-emerald-500/10 to-transparent pointer-events-none" />
+        <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold">
+              <Leaf className="w-3.5 h-3.5" />
+              <span>계명대 탄소 절감 에코 마일리지 시스템</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+              메이트와 달리고 탄소 줄이면, <span className="text-emerald-400">장비·기프티콘이 무료!</span>
+            </h2>
+            <p className="text-xs text-indigo-200/90 leading-relaxed">
+              GPS로 실시간 이동거리를 측정하여 <strong>탄소 절감량(kg CO₂)</strong>과 <strong>에코 마일리지 포인트</strong>로 자동 환산됩니다.
+              메이트와 동반 운동 시 1.5배 보너스가 적용되며, 적립된 포인트로 제휴 스포츠 장비와 기프티콘을 즉시 교환할 수 있습니다.
+            </p>
+          </div>
+
+          {/* Quick Metrics & Actions */}
+          <div className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="grid grid-cols-3 gap-2.5 bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/10 text-center">
+              <div>
+                <span className="text-[10px] text-indigo-200 block">내 보유 포인트</span>
+                <span className="text-base font-black font-mono text-amber-300">
+                  {ecoProfile.points.toLocaleString()} <span className="text-[10px]">P</span>
+                </span>
+              </div>
+              <div className="border-x border-white/10 px-2">
+                <span className="text-[10px] text-indigo-200 block">탄소 절감량</span>
+                <span className="text-base font-black font-mono text-emerald-300">
+                  {ecoProfile.totalCarbonSavedKg} <span className="text-[10px]">kg</span>
+                </span>
+              </div>
+              <div>
+                <span className="text-[10px] text-indigo-200 block">누적 이동거리</span>
+                <span className="text-base font-black font-mono text-white">
+                  {ecoProfile.totalDistanceKm} <span className="text-[10px]">km</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => handleStartSoloWorkout('running')}
+                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/25 transition-all cursor-pointer"
+              >
+                <Navigation className="w-4 h-4" />
+                <span>GPS 운동 측정 시작</span>
+              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsShopOpen(true)}
+                  className="flex-1 px-3 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <span>제휴 샵</span>
+                </button>
+                <button
+                  onClick={() => setIsMissionsOpen(true)}
+                  className="flex-1 px-3 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                >
+                  <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                  <span>미션</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -377,6 +478,23 @@ export const CommunitySection: React.FC<CommunitySectionProps> = ({
                         {post.mateInfo.currentMembers} / {post.mateInfo.maxMembers}명
                       </span>
                     </div>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleStartWorkoutWithMate(post.authorName, post.sportId);
+                      }}
+                      className="w-full mt-2 py-1.5 px-3 rounded-xl bg-gradient-to-r from-[#6C5CE7] to-[#8075E8] hover:from-[#5E4EE0] hover:to-[#6C5CE7] text-white font-bold text-[11px] flex items-center justify-between transition-all shadow-2xs cursor-pointer"
+                    >
+                      <span className="flex items-center gap-1">
+                        <Navigation className="w-3 h-3" />
+                        <span>이 메이트와 GPS 운동 시작</span>
+                      </span>
+                      <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.2 rounded font-black">
+                        1.5배 적립 ⚡
+                      </span>
+                    </button>
                   </div>
                 )}
 
@@ -440,6 +558,54 @@ export const CommunitySection: React.FC<CommunitySectionProps> = ({
           onRefreshPosts();
         }}
         onRequireLogin={onRequireLogin}
+        onStartWorkoutWithMate={handleStartWorkoutWithMate}
+      />
+
+      {/* GPS Activity Tracking Modal */}
+      <GpsActivityTracker
+        isOpen={isGpsOpen}
+        onClose={() => setIsGpsOpen(false)}
+        initialActivityType={trackerSportType}
+        initialMateName={trackerMateName}
+        onWorkoutFinished={(_activity, newProfile) => {
+          setEcoProfile(newProfile);
+        }}
+        onOpenShop={() => {
+          setIsGpsOpen(false);
+          setIsShopOpen(true);
+        }}
+      />
+
+      {/* Eco Reward Point Store Modal */}
+      <EcoRewardShopModal
+        isOpen={isShopOpen}
+        onClose={() => setIsShopOpen(false)}
+        ecoProfile={ecoProfile}
+        onProfileUpdated={(newProfile) => {
+          setEcoProfile(newProfile);
+        }}
+        onOpenGpsTracker={() => {
+          setIsShopOpen(false);
+          setIsGpsOpen(true);
+        }}
+        onOpenMissions={() => {
+          setIsShopOpen(false);
+          setIsMissionsOpen(true);
+        }}
+      />
+
+      {/* Campus Eco Missions Modal */}
+      <EcoMissionsModal
+        isOpen={isMissionsOpen}
+        onClose={() => setIsMissionsOpen(false)}
+        ecoProfile={ecoProfile}
+        onProfileUpdated={(newProfile) => {
+          setEcoProfile(newProfile);
+        }}
+        onOpenGpsTracker={() => {
+          setIsMissionsOpen(false);
+          setIsGpsOpen(true);
+        }}
       />
     </div>
   );

@@ -272,6 +272,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz, onExplore
               몸을 활기차게 움직이는 <strong>운동(運動)</strong>과 삶을 바꾸는 소중한 인연인 <strong>운명(運命)</strong>의 만남.
               비싼 회원권 없이도 평생 즐겁게 지속할 수 있는 나만의 인생 스포츠를 찾아드립니다.
             </p>
+            <div className="mt-2.5 pt-2.5 border-t border-gray-100 flex items-center gap-1.5 text-xs font-bold text-[#4F46E5]">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              <span>&ldquo;나와 딱 맞는 운동을 만나는 건, 어쩌면 운명&rdquo;</span>
+            </div>
           </div>
         </div>
       </div>

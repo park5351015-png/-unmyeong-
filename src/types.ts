@@ -142,3 +142,83 @@ export interface PostComment {
   likes: number;
 }
 
+// GPS Activity & Carbon Saving Eco System Types
+export type ActivityType = 'running' | 'cycling' | 'walking';
+
+export interface RouteCoordinate {
+  lat: number;
+  lng: number;
+  timestamp: number;
+}
+
+export interface WorkoutActivity {
+  id: string;
+  type: ActivityType;
+  title: string;
+  distanceKm: number;
+  durationSeconds: number;
+  averagePace: string;
+  averageSpeedKmH: number;
+  carbonSavedKg: number;
+  ecoPointsEarned: number;
+  caloriesBurned: number;
+  partnerMateName?: string;
+  partnerPostId?: string;
+  createdAt: string;
+  routeCoordinates?: { lat: number; lng: number }[];
+}
+
+export interface EcoMission {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  targetType: 'running' | 'cycling' | 'distance' | 'mate' | 'carbon';
+  targetValue: number;
+  currentValue: number;
+  unit: string;
+  rewardPoints: number;
+  isCompleted: boolean;
+  isClaimed: boolean;
+}
+
+export type EcoRewardCategory = 'all' | 'gifticon' | 'gear' | 'supplements';
+
+export interface EcoRewardItem {
+  id: string;
+  name: string;
+  category: 'gifticon' | 'gear' | 'supplements';
+  brand: string;
+  pointsCost: number;
+  originalWonPrice: number;
+  imageUrl: string;
+  description: string;
+  badge?: string;
+  inStock: boolean;
+  partnerNote?: string;
+}
+
+export interface RedeemedVoucher {
+  id: string;
+  rewardId: string;
+  itemName: string;
+  brand: string;
+  pointsSpent: number;
+  barcode: string;
+  pinCode: string;
+  imageUrl: string;
+  redeemedAt: string;
+  expiresAt: string;
+  isUsed: boolean;
+}
+
+export interface UserEcoProfile {
+  points: number;
+  totalDistanceKm: number;
+  totalCarbonSavedKg: number;
+  completedWorkoutsCount: number;
+  redeemedVouchers: RedeemedVoucher[];
+  workoutHistory: WorkoutActivity[];
+}
+
+

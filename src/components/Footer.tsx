@@ -29,8 +29,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSponsor, onOpenQuiz, onSel
               </span>
             </div>
             <p className="text-gray-600 leading-relaxed max-w-sm text-xs">
-              &quot;find your sport, find your destiny.&quot; <br />
-              운동을 시작하고 싶지만 무엇을 해야 할지 모르는 대학생들을 위한 맞춤형 스포츠 큐레이션 및 추천 서비스입니다.
+              &quot;나와 딱 맞는 운동을 만나는 건, 어쩌면 운명&quot; <br />
+              몸을 움직이는 <strong>운동(運動)</strong>과 삶의 전환점이 되는 <strong>운명(運命)</strong>의 만남. 비싼 회원권 없이도 평생 즐길 수 있는 맞춤형 캠퍼스 스포츠 플랫폼입니다.
             </p>
             <div className="flex items-center gap-2 text-[11px] font-mono text-gray-400">
               <span>status: all systems operational</span>

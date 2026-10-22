@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   Send,
   Pin,
+  Navigation,
 } from 'lucide-react';
 import { User as FirebaseUser } from 'firebase/auth';
 import { CommunityPost, PostComment } from '../types';
@@ -37,6 +38,7 @@ interface PostDetailModalProps {
   isAdmin: boolean;
   onPostUpdated: () => void;
   onRequireLogin: () => void;
+  onStartWorkoutWithMate?: (mateName: string, sportId: string) => void;
 }
 
 export const PostDetailModal: React.FC<PostDetailModalProps> = ({
@@ -47,6 +49,7 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
   isAdmin,
   onPostUpdated,
   onRequireLogin,
+  onStartWorkoutWithMate,
 }) => {
   const [comments, setComments] = useState<PostComment[]>([]);
   const [loadingComments, setLoadingComments] = useState(false);
@@ -375,24 +378,39 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                 </div>
               </div>
 
-              {/* Mate Join CTA */}
+              {/* Mate Join & GPS Workout CTA */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-emerald-200">
                 <p className="text-xs text-emerald-900 font-medium">
                   {currentStatus === 'recruiting'
                     ? '🙌 함께 운동하고 싶다면 아래 댓글로 편하게 한마디 남겨보세요!'
                     : '이 메이트 모집은 완료되었습니다.'}
                 </p>
-                {post.mateInfo.contactLink && (
-                  <a
-                    href={post.mateInfo.contactLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors"
-                  >
-                    <span>오픈카톡 바로가기</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
+                <div className="flex items-center gap-2 flex-wrap">
+                  {onStartWorkoutWithMate && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onClose();
+                        onStartWorkoutWithMate(post.authorName, post.sportId);
+                      }}
+                      className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#6C5CE7] to-[#8075E8] hover:from-[#5E4EE0] hover:to-[#6C5CE7] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                    >
+                      <Navigation className="w-3.5 h-3.5" />
+                      <span>이 메이트와 GPS 운동 시작 (1.5배 적립)</span>
+                    </button>
+                  )}
+                  {post.mateInfo.contactLink && (
+                    <a
+                      href={post.mateInfo.contactLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors"
+                    >
+                      <span>오픈카톡</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           )}

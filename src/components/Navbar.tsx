@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Compass, GitCompare, ShoppingBag, Mail, ShieldCheck, LogIn, LogOut, User, Users, Wifi, BatteryMedium, Headphones, MapPin, Download, Smartphone } from 'lucide-react';
+import { Sparkles, Compass, GitCompare, ShoppingBag, Mail, ShieldCheck, LogIn, LogOut, User, Users, MapPin, Download, Smartphone } from 'lucide-react';
 import { User as FirebaseUser } from 'firebase/auth';
 
 interface NavbarProps {
@@ -96,11 +96,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => setCurrentTab('community')}
-              className={`transition-colors cursor-pointer ${
+              className={`transition-colors cursor-pointer flex items-center gap-1 ${
                 currentTab === 'community' ? 'text-black font-bold' : 'hover:text-black'
               }`}
             >
-              메이트 커뮤니티
+              <span>메이트 커뮤니티</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" title="GPS 에코 마일리지 & 리워드" />
             </button>
             <button
               onClick={() => setCurrentTab('products')}
@@ -128,18 +129,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           </svg>
         </div>
 
-        {/* Right: Mac status icons & CTAs */}
+        {/* Right: CTAs */}
         <div className="flex items-center gap-3 text-xs">
-          {/* Mac System indicators */}
-          <div className="hidden sm:flex items-center gap-2.5 text-gray-500 font-mono text-[11px] pr-2 border-r border-gray-200">
-            <Wifi className="w-3.5 h-3.5 text-gray-600" />
-            <Headphones className="w-3.5 h-3.5 text-gray-600" />
-            <div className="flex items-center gap-1 text-gray-600">
-              <BatteryMedium className="w-3.5 h-3.5" />
-              <span>98%</span>
-            </div>
-            <span className="text-gray-400">12:15 PM</span>
-          </div>
+          {/* Eco Mileage quick badge */}
+          <button
+            onClick={() => setCurrentTab('community')}
+            title="GPS 탄소 절감 마일리지 & 제휴 샵"
+            className="hidden lg:flex items-center gap-1 px-2.5 py-1 rounded-lg border border-emerald-200 bg-emerald-50/80 hover:bg-emerald-100 text-emerald-800 text-[11px] font-bold transition-all cursor-pointer shadow-2xs"
+          >
+            <span>🌱</span>
+            <span>에코 마일리지</span>
+          </button>
 
           {/* App Install Button */}
           <button
